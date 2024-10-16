@@ -55,7 +55,7 @@ public class PostRepository : IPostRepositortes
 
         return await posts.Skip(skipNumber).Take(query.PageSize).ToListAsync();
     }
-
+    
     public async Task<Post> CreateAsync(Post post)
     {
         await _dbContext.Posts.AddAsync(post);
