@@ -2,6 +2,7 @@
 using Messenger.Helpers.Post;
 using Messenger.Interfaces;
 using Messenger.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Messenger.Controllers;
@@ -17,6 +18,7 @@ public class PostController : ControllerBase
         _postRepo = postRepo;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] PostQuery query)
     {
@@ -25,6 +27,7 @@ public class PostController : ControllerBase
         return Ok(posts);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] PostDto postDto)
     {
@@ -37,6 +40,7 @@ public class PostController : ControllerBase
         return Ok(post.PostToPostDto());
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] PostDto postDto)
     {
@@ -47,6 +51,7 @@ public class PostController : ControllerBase
         return Ok(post.PostToPostDto());
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
